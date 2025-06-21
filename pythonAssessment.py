@@ -2,22 +2,40 @@ from text_analysis_manager.validation import validate_task_word
 from collections import Counter
 
 # Read article in to string variable      
-file_path = 'article.txt'
-  
-with open(file_path, 'r') as file:
-  text = file.read()
+
+def string_article(file_path):
+    with open(file_path, 'r') as file:
+        return file.read()
+     
+
+# file_path = 'article.txt'
+
+# with open(file_path, 'r') as file:
+#   text = file.read()
+
+
 
 #Count Specific Word
-def word_occurance_count(word, text):
+def word_occurance_count(text, word):
     try:
         validate_task_word(word)
+
+        if not text.strip():
+            print(f"The word '{word}' occurs 0 time(s) in the article.")
+            return 0
+
         words = text.lower().split()
         word_count = Counter(words)
-        if word in text:
-            number = word_count[word]
-            print(f"The word {word} occurs {number} time(s)in the article: ")
+        if word.lower() in words:
+            number = word_count[word.lower()]
+            print(f"The word '{word}' occurs {number} time(s) in the article.")
+            return number
+        else:
+            print(f"The word '{word}' does not occur in the article.")
+            return 0
     except ValueError as e:
-        print(f"Error: {str(e)}")
+        print(e)
+        return 0
 
 #Identify Most Common Word
 def most_common_word(text):
@@ -56,6 +74,9 @@ def num_of_sentences(text):
 
 # Main Text Analysis Function
 def main():
+    file_path = 'article.txt'
+    text = string_article(file_path)
+
     while True:
         print("Text Analysis System")
         print("1. Count Specific Word Occurance")
@@ -68,7 +89,7 @@ def main():
 
         if choice == "1":
             word = input("What would would you like to search the occurance of: ")
-            word_occurance_count(word)             
+            word_occurance_count(text, word)             
         elif choice == "2":     
             most_common_word(text)
         elif choice == "3":
