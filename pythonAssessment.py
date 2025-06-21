@@ -8,7 +8,7 @@ with open(file_path, 'r') as file:
   text = file.read()
 
 #Count Specific Word
-def word_occurance_count(word):
+def word_occurance_count(word, text):
     try:
         validate_task_word(word)
         words = text.lower().split()
@@ -46,10 +46,13 @@ def num_of_paragraphs(text):
 
 #Count Number of Sentences
 def num_of_sentences(text):
-	period_count = text.count(". ")
-	print(f"Number of sentences in article: {period_count}")
-
-
+    sentence_endings = {".", "!", "?"}
+    count = 0 
+    for index in range(len(text)):
+        if text[index] in sentence_endings:
+             if index == len(text) - 1 or text[index + 1] == " ":
+                  count += 1
+    print(f"Number of sentences in article: {count}")    	
 
 # Main Text Analysis Function
 def main():
