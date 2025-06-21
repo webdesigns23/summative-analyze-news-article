@@ -2,21 +2,12 @@ from text_analysis_manager.validation import validate_task_word
 from collections import Counter
 
 # Read article in to string variable      
-
 def string_article(file_path):
     with open(file_path, 'r') as file:
         return file.read()
      
-
-# file_path = 'article.txt'
-
-# with open(file_path, 'r') as file:
-#   text = file.read()
-
-
-
 #Count Specific Word
-def word_occurance_count(text, word):
+def identify_most_common_word(text, word):
     try:
         validate_task_word(word)
 
@@ -45,7 +36,7 @@ def most_common_word(text):
 	print(most_common)
 
 #Calculate Average Word Length
-def average_word_length(text):
+def calculate_average_word_length(text):
 	words = text.split()
 	total_length = sum(len(word) for word in words)
 	num_words = len(words)
@@ -57,13 +48,13 @@ def average_word_length(text):
 		print("No words in article")
 	
 #Count Number of Paragraphs
-def num_of_paragraphs(text):
+def count_paragraphs(text):
 	paragraphs = [p for p in text.split('\n\n') if p.strip()]
 	paragraph_count = len(paragraphs)
 	print(f"Number of paragraphs: {paragraph_count}")
 
 #Count Number of Sentences
-def num_of_sentences(text):
+def count_sentences(text):
     sentence_endings = {".", "!", "?"}
     count = 0 
     for index in range(len(text)):
@@ -89,15 +80,15 @@ def main():
 
         if choice == "1":
             word = input("What would would you like to search the occurance of: ")
-            word_occurance_count(text, word)             
+            identify_most_common_word(text, word)             
         elif choice == "2":     
             most_common_word(text)
         elif choice == "3":
-            average_word_length(text)
+            calculate_average_word_length(text)
         elif choice == "4":
-            num_of_paragraphs(text)
+            count_paragraphs(text)
         elif choice == "5":
-            num_of_sentences(text)
+            count_sentences(text)
         elif choice == "6":
             print("Exiting the program...")
             break
